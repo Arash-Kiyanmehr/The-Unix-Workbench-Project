@@ -4,5 +4,5 @@ readme:
 	date -u >> README.md
 	echo "" >> README.md
 	echo "The bash file contains of" >> README.md
-	cat guessinggame.sh | wc -w >> README.md
+	cat guessinggame.sh | wc -l >> README.md
 	echo "lines of code." >> README.md
