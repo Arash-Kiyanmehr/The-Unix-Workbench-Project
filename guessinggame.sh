@@ -2,9 +2,13 @@
 
 function process_input {
 
-	files=$(ls | wc -w)
+	files=$(ls -la | wc -l)
+	let files=$(echo "$files - 3" | bc -l)
 	read guess
-	if [[ $guess -eq $files ]]
+	if [[ ! $guess =~ [0-9].* ]]
+	then
+		echo 3
+	elif [[ $guess -eq $files ]]
 	then
 		echo 0
 	elif [[	$guess -gt $files ]]
@@ -25,6 +29,9 @@ do
 	elif [[ $user_guess -eq 2 ]]
 	then
 		echo "too low"
+	elif [[ $user_guess -eq 3 ]]
+	then
+		echo "Not a correct number"
 	fi
 	echo "try again:"
 	let user_guess=$(process_input)
