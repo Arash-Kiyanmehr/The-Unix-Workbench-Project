@@ -4,8 +4,9 @@ function process_input {
 
 	files=$(ls -la | wc -l)
 	let files=$(echo "$files - 3" | bc -l)
-	read guess
-	if [[ ! $guess =~ [0-9].* ]]
+	read -r -p "How many files in the current folder? " guess
+	 
+	if [[ ! $guess =~ ^[0-9]+$ ]]
 	then
 		echo 3
 	elif [[ $guess -eq $files ]]
@@ -19,7 +20,6 @@ function process_input {
 	fi
 }
 
-echo "How many files in current folder? "
 user_guess=$(process_input)
 while [[ $user_guess -ne 0 ]]
 do
