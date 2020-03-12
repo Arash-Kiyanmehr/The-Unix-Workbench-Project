@@ -3,20 +3,24 @@
 function process_input {
 
 	files=$(ls -la | wc -l)
-	let files=$(echo "$files - 3" | bc -l)
+	let files=$(($files-3))
 	read -r -p "How many files in the current folder? " guess
-
+	
 	if [[ ! $guess =~ ^[0-9]+$ ]]
 	then
 		echo 3
-	elif [[ $guess -eq $files ]]
-	then
-		echo 0
-	elif [[	$guess -gt $files ]]
-	then
-		echo 1
 	else
-		echo 2
+		if [[ $(echo "$guess - $files == 0" | bc -l) -eq 1 ]]
+		then
+			echo 0
+		else
+			if [[ $(echo "$guess > $files" | bc -l) -eq 1 ]]
+			then
+				echo 1
+			else
+				echo 2
+			fi
+		fi
 	fi
 }
 
